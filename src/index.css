@@ -2,41 +2,80 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Arabic LMS Design System - Modern Education Platform
+All colors MUST be HSL. Supporting both Arabic RTL and English LTR layouts.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Background System */
+    --background: 220 15% 6%;
+    --background-secondary: 220 15% 8%;
+    --background-tertiary: 220 15% 10%;
+    --foreground: 220 5% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card System with Glassmorphism */
+    --card: 220 15% 8%;
+    --card-secondary: 220 15% 10%;
+    --card-foreground: 220 5% 95%;
+    --glass-bg: 220 15% 12%;
+    --glass-border: 220 15% 25%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Popover System */
+    --popover: 220 15% 8%;
+    --popover-foreground: 220 5% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary Brand Colors - Deep Ocean Blue */
+    --primary: 217 91% 60%;
+    --primary-dark: 217 91% 45%;
+    --primary-light: 217 91% 75%;
+    --primary-foreground: 220 5% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary Colors - Warm Gold */
+    --secondary: 45 93% 58%;
+    --secondary-dark: 45 93% 43%;
+    --secondary-light: 45 93% 73%;
+    --secondary-foreground: 220 15% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Accent Colors - Cyan Highlights */
+    --accent: 188 94% 68%;
+    --accent-dark: 188 94% 53%;
+    --accent-foreground: 220 15% 10%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Muted System */
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 5% 65%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Status Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 5% 95%;
+    --success: 142 71% 45%;
+    --success-foreground: 220 5% 95%;
+    --warning: 45 93% 58%;
+    --warning-foreground: 220 15% 10%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Border and Input */
+    --border: 220 15% 20%;
+    --input: 220 15% 15%;
+    --ring: 217 91% 60%;
 
-    --radius: 0.5rem;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(188 94% 68%));
+    --gradient-secondary: linear-gradient(135deg, hsl(45 93% 58%), hsl(217 91% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 15% 6%) 0%, hsl(217 91% 15%) 50%, hsl(188 94% 15%) 100%);
+    --gradient-glass: linear-gradient(145deg, hsl(220 15% 12% / 0.7), hsl(220 15% 8% / 0.3));
+
+    /* Shadows with Glow Effects */
+    --shadow-glass: 0 8px 32px hsl(220 15% 3% / 0.4);
+    --shadow-primary: 0 8px 32px hsl(217 91% 60% / 0.3);
+    --shadow-secondary: 0 8px 32px hsl(45 93% 58% / 0.3);
+    --shadow-elevation: 0 4px 16px hsl(220 15% 3% / 0.2);
+
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +139,82 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-arabic;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+  }
+
+  /* Arabic Font Support */
+  .font-arabic {
+    font-family: 'Noto Sans Arabic', 'Poppins', sans-serif;
+  }
+
+  .font-english {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* RTL Support */
+  [dir="rtl"] {
+    text-align: right;
+  }
+
+  [dir="ltr"] {
+    text-align: left;
+  }
+
+  /* Glassmorphism Effects */
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.2);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(16px);
+    border: 1px solid hsl(var(--glass-border) / 0.15);
+    box-shadow: var(--shadow-elevation);
+  }
+
+  /* Smooth Animations */
+  .animate-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .animate-fast {
+    transition: var(--transition-fast);
+  }
+
+  /* Hover Effects */
+  .hover-glow:hover {
+    box-shadow: var(--shadow-primary);
+    transform: translateY(-4px);
+  }
+
+  .hover-secondary:hover {
+    box-shadow: var(--shadow-secondary);
+    transform: translateY(-2px);
+  }
+}
+
+@layer components {
+  /* Custom Scrollbar */
+  .scrollbar-modern::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-modern::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .scrollbar-modern::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 3px;
+  }
+
+  .scrollbar-modern::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-dark));
   }
 }
